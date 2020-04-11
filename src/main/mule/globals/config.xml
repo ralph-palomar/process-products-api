@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	 <configuration-properties doc:name="Configuration properties" doc:id="825a83d1-c448-4cbe-8d73-17c5d1bf61f5" file="extensions/common.yaml" />
+	 <configuration-properties doc:name="Configuration properties" doc:id="0e235b27-08be-434c-b065-5e53b0ab2761" file="extensions/${mule.env}.yaml" />
+	 <configuration defaultErrorHandler-ref="globalErrorHandler"></configuration>
+	 <http:listener-config name="process-products-api-httpListenerConfig">
+        <http:listener-connection host="0.0.0.0" port="${http.port}" />
+    </http:listener-config>
+    <apikit:config name="process-products-api-config" api="api\process-products-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+	<http:request-config name="system-productdb-api-httpRequestConfig" doc:name="HTTP Request configuration" doc:id="9e57eccd-72c1-4fc6-abad-73cb02937ac7" responseTimeout="${http.request.system.productdb.timeout}">
+		<http:request-connection host="${http.request.system.productdb.host}" port="${http.request.system.productdb.port}" />
+	</http:request-config>
+    <http:request-config name="system-partnervendor-api-httpRequestConfig" doc:name="HTTP Request configuration" doc:id="9f2c9f16-2c7f-4bf2-9893-b36dc5232a01" responseTimeout="${http.request.system.partnervendor.timeout}">
+		<http:request-connection host="${http.request.system.partnervendor.host}" port="${http.request.system.partnervendor.port}" />
+	</http:request-config>
+</mule>

@@ -1,0 +1,15 @@
+http:
+   request:
+      system.productdb:
+         host: "localhost"
+         port: "8081"
+         timeout: "60000"
+         endpoint:
+            products: "/api/v1/products"
+      system.partnervendor:
+         host: "localhost"
+         port: "8082"
+         timeout: "60000"
+         endpoint:
+            products: "/api/v1/products"
+         
